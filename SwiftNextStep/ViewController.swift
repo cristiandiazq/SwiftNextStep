@@ -14,7 +14,17 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    saveMyFirstTable("Carlos", lastName: "Perez", age: 52, loveLearning: false)
+    let query = PFQuery(className: "myFirstTable")
+    query.findObjectsInBackgroundWithBlock { (results:[PFObject]?, error: NSError?) -> Void in
+      if let error = error {print("error querying MyFirstTable - \(error.localizedDescription)")}
+      else {
+        if let results = results as [PFObject]?{
+          for result in results {
+            print(result)
+          }
+        }
+      }
+    }
     
   }
   
