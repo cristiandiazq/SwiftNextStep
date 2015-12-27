@@ -7,19 +7,47 @@
 //
 
 import UIKit
+import Parse
 
 class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    saveMyFirstTable("Carlos", lastName: "Perez", age: 52, loveLearning: false)
+    
   }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  
+    
+    func saveTestObject(foo: String) {
+      
+      let testObject = PFObject(className: "TestObject")
+      testObject["foo"] = "foo"
+      testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+        print("Object has been saved.")
+        
+      }
+    }
+    
+    
+    func saveMyFirstTable (firstName: String, lastName: String, age: Int, loveLearning: Bool) {
+      
+      let myFirstTable = PFObject(className: "myFirstTable")
+      myFirstTable["myFirstName"] = firstName
+      myFirstTable["myLastName"] = lastName
+      myFirstTable["Age"] = age
+      myFirstTable["iLoveLearning"] = loveLearning
+      myFirstTable.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+        print("Parece que todo salio bien")
+        
+    }
   }
-
-
+    
+    
 }
+
+ 
+
+
+
 
